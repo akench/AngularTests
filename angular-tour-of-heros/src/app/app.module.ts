@@ -15,14 +15,4 @@ import { AppComponent } from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  name: string = '';
-
-  constructor() {
-    this.name = 'Hello World'
-  }
-
-  ngOnInit() {
-    this.name = 'Hello World'
-  }
-}
+export class AppModule { }
