@@ -1,0 +1,15 @@
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <!-- for each hero in heroes list -->
+  <!-- When the list item is clicked called onSelect method and pass in curr_hero -->
+  <li *ngFor = "let currHero of heroes"
+    [class.selected]="currHero === selectedHero"
+      (click)="onSelect(currHero)">
+
+    <span class="badge">{{currHero.id}}</span> {{ currHero.name }}
+    
+  </li>
+</ul>
+
+
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
