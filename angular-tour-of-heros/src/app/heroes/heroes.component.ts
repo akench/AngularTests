@@ -18,7 +18,11 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    //the new version is asynchronous: 
+      //this waits for the observable to emit the Heroes array 
+      //subscribe means the emitted array is passed to the call back (which set this.heroes)
+    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+    // this.heroes = this.heroService.getHeroes();
   }
 
   //this means that heroService is a private variable of HeroComponent
