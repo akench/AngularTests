@@ -1,0 +1,36 @@
+Components:
+    fundemental building block of angular aps
+    display data, listen for input, take action
+
+    to generate a Component, makes its own directory for the component
+    > ng generate component {component name}
+
+
+    ngOnInit = lifestyle hook, called after component is created
+
+    to inject a component's template inside another component's template
+        do <app-{component name}><app-{component name}>
+
+    
+    ** every component must be declared in exactly ONE NgModule **
+
+    
+
+
+
+HTML:
+    {{ var }} interpolates a variable there
+    {{ var_string | uppercase }} activates the UppercasePipe, which is formatting
+
+
+Misc.
+    [(ngModel)] is Angular's two way binding syntax
+
+        <input [(ngModel)]="hero.name" placeholder="name">
+        binds the hero.name property to the HTML textbox, data is flowing back and forth
+
+        must import FormsModule to use
+
+    Decorators:
+        @Component show that the thingy is a component
+        @NgModule shows the top level AppModule class
