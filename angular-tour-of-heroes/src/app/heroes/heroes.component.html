@@ -1,9 +1,15 @@
-<div>
-  <h1> {{ hero.name }} </h1>
-  <label>name:
-    <input [(ngModel)]="hero.name" placeholder="name">
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let currHero of heroes" 
+    [class.selected]="currHero === selectedHero"
+    (click)="onSelect(currHero)">
+    
+    <span class="badge">{{currHero.id}}</span> {{currHero.name}}
+  </li>
+</ul>
 
-  </label>
+<!-- injects the hero detail template below, sets the hero detail's "hero" property to selected hero -->
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
 
 
-</div>
+
