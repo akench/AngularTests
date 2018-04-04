@@ -14,6 +14,12 @@ Components:
     
     ** every component must be declared in exactly ONE NgModule **
 
+    use the @Input decorator on a component variable to show that the variable will
+        be passed in from an external component (must import Input)
+
+        @Input() hero: Hero;
+
+
     
 
 
@@ -21,6 +27,43 @@ Components:
 HTML:
     {{ var }} interpolates a variable there
     {{ var_string | uppercase }} activates the UppercasePipe, which is formatting
+
+    *ngFor is like a for loop
+        <li *ngFor="let curHero of heroes" (click)="onSelect(currHero)">
+            <span class="badge">{{currHero.id}}</span> {{currHero.name}}
+        </li>
+
+    *ngIf injects the HTML within it only if its parameter is not undefined
+        <div *ngIf="selectedHero">
+            code here
+        </div>
+
+
+    Angular Class Binding:
+        [class.some-css-class]="boolean condition"
+
+        example:
+            [class.selected]="currHero === selectedHero"
+            if currHer is same as selected hero, mark the selected class as true, changing the look
+
+
+
+    Angular Property Binding
+
+        <app-hero-detail [hero]="selectedHero"></app-hero-detail>
+
+        binds the selectedHero property of current component to the hero property of the target
+            when selectedHero changes, the "hero" property will update
+
+        ** Angular only binds to public component properties **
+
+
+    Routing:
+        <nav>
+            <a routerLink="/heroes">Heroes</a>
+        </nav>
+
+   
 
 
 Misc.
@@ -32,5 +75,86 @@ Misc.
         must import FormsModule to use
 
     Decorators:
-        @Component show that the thingy is a component
-        @NgModule shows the top level AppModule class
+        @Component() show that the thingy is a component
+        @NgModule() shows the top level AppModule class
+        @Input() if an external component binds to it (pass in a variable to the component)
+        @Injectable() this service might have injected dependencies into other places
+
+    
+    AppRoutingModules
+        ng generate module app-routing --flat --module=app
+            --flat means don't make its own folder
+            --module=app means register it in imports array of AppModule
+
+        makes routes...
+
+        must export the RoutingModule in the routing component, so that AppModule components can use it
+
+        Router has two properties:
+            1) path = URL string
+            2) component = the component that the router should create when going to that URL
+
+        Must also initialize the router and start it listening for url changes
+            imports: [ RouterModule.forRoot(routes) ] in the RouterModule imports array
+                forRoot() because router is configured at app's root level
+
+        To show in the HTML, <router-outlet></router-outlet>
+
+        in the routes property
+        { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
+        sets a default path
+
+        { path: 'detail/:id'} shows that :id is a parameter for a specific id
+
+            Extract parameters from URL
+                const id = +this.route.snapshot.paramMap.get('id');
+                route.snapshot = static img of route information
+                paramMap is used to get the parameters that we defined (:id)
+                + converts the string returned to a number 
+            
+
+
+        ActivatedRoute:
+            holds information about the component that routed to the current component 
+
+        Location:
+            Used for navigating back to the view that nagivated here 
+
+            this.location.back();
+
+
+
+
+
+    Services:
+        Use to share information among classes that don't know each other
+
+        use Angular Dependency Injection and inject into the constructors of components that need it
+            identifies it as an injection site
+
+        ng generate service {service-name}
+
+        You must provide the HeroService in the dependency injection system 
+            before Angular can inject it into the HeroesComponent
+            
+            in AppModule class import the Service, and add it to the @NgModule.providers array
+            providers array tells Angular to create a single shared instance of the Service
+                and inject it into anything that asks for it
+
+
+        Observable Service:
+            Allows for asynchronous tasks
+            return of(Observable<type>);
+
+            to get the Observable:
+
+            getHeroes(): void {
+                this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+            }
+
+            Observable.subscribe() parameter is heroes, then assigns components hero property to this
+
+
+
+            
+        
