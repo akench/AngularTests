@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../../services/data.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
   posts: Post[];
 
   isEdit: boolean = false;
-  isShowingPosts: boolean = true;
+  isShowingPosts: boolean = false;
 
   constructor(private dataService: DataService) { }
 
