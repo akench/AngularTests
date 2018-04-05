@@ -1,73 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  </head>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+</head>
 
 
-  <body>
-
-  <div style="padding: 0px 0px 0px 50px;">
+<body>
 
 
-    <h1>{{name}}</h1>
-    <ul>
-      <li>Age: {{age}}</li>
-      <li>Email: {{email}}</li>
-      <li>Address: {{address.street}}  {{address.city}},  {{address.state}}</li>
-    </ul>
 
-    <button (click)="toggleEdit()" class="btn btn-primary">Edit User</button>
+  <h1>{{name}}</h1>
+  <ul>
+    <li>Age: {{age}}</li>
+    <li>Email: {{email}}</li>
+    <li>Address: {{address.street}} {{address.city}}, {{address.state}}</li>
+  </ul>
 
-    <div *ngIf="isEdit">
 
-      <h1>Edit User</h1>
-      <form>
-        <div>
-          <label for="name">Name</label><br>
-          <!-- binds name property to component's name property -->
-          <input type="text" [(ngModel)]="name" name="name">
-        </div>
 
-        <div>
-          <label for="age">Age</label><br>
-          <input type="number" [(ngModel)]="age" name="age">
-        </div>
 
-        <div class="form-group">
-          <label for="email">Email</label><br>
-          <input type="email" [(ngModel)]="email" name="email">
-        </div>
 
-        <div>
-          <label for="street">Street</label><br>
-          <input type="text" [(ngModel)]="address.street" name="street">
-        </div>
 
-        <div>
-          <label for="city">City</label><br>
-          <input type="text" [(ngModel)]="address.city" name="city">
-        </div>
 
-        <div>
-          <label for="state">State</label><br>
-          <input type="text" [(ngModel)]="address.state" name="state">
-        </div>
+  <button (click)="toggleEdit()" class="btn btn-primary">Edit User</button>
 
-      </form>
+  <div *ngIf="isEdit">
 
-    </div>
+    <h1>Edit User</h1>
+    <form>
+      <div>
+        <label for="name">Name</label>
+        <br>
+        <!-- binds name property to component's name property -->
+        <input type="text" [(ngModel)]="name" name="name">
+      </div>
+
+      <div>
+        <label for="age">Age</label>
+        <br>
+        <input type="number" [(ngModel)]="age" name="age">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <br>
+        <input type="email" [(ngModel)]="email" name="email">
+      </div>
+
+      <div>
+        <label for="street">Street</label>
+        <br>
+        <input type="text" [(ngModel)]="address.street" name="street">
+      </div>
+
+      <div>
+        <label for="city">City</label>
+        <br>
+        <input type="text" [(ngModel)]="address.city" name="city">
+      </div>
+
+      <div>
+        <label for="state">State</label>
+        <br>
+        <input type="text" [(ngModel)]="address.state" name="state">
+      </div>
+
+    </form>
+
+  </div>
 
 
   <br>
   <br>
+
+
+  <h3>Hobbies</h3>
 
   <ul>
-  <div class="card w-50">
+    <div class="card w-50">
 
       <li *ngFor="let hobby of hobbies; let i = index">
         <div class="card-body">
@@ -76,49 +91,51 @@
           <button (click)="deleteHobby(hobby)" class="btn btn-primary">Remove hobby</button>
         </div>
       </li>
-    
-  </div>
+
+    </div>
 
 
   </ul>
 
 
-    <form (submit)="addHobby(inputHobby.value)">
-      <div>
-        <label for="hobby">Insert New Hobby</label>
-        <input type="text" #inputHobby>
+  <form (submit)="addHobby(inputHobby.value)">
+    <div>
+      <label for="hobby">Insert New Hobby</label>
+      <input type="text" #inputHobby>
+    </div>
+  </form>
+
+
+
+  <br>
+  <br>
+  <br>
+
+  <button (click)="togglePosts()" class="btn btn-info">Toggle Posts</button>
+  <br>
+  <div *ngIf="isShowingPosts">
+    <h1>Posts</h1>
+    <div *ngFor="let post of posts">
+
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title" style="font-weight: bold;">{{post.title}}</h5>
+          <p class="card-text">{{post.body}}</p>
+        </div>
       </div>
-    </form>
-      
 
-
-    <br>
-    <br>
-    <br>
-
-    <button (click)="togglePosts()" class="btn btn-info">Toggle Posts</button>
-    <div *ngIf="isShowingPosts">
-      <h1>Posts</h1>
-      <div *ngFor="let post of posts">
-
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title" style="font-weight: bold;">{{post.title}}</h5>
-              <p class="card-text">{{post.body}}</p>
-            </div>
-          </div>
-
-      </div>
     </div>
   </div>
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
 
 </body>
+
 </html>
-
-

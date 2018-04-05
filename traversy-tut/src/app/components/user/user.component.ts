@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.name = "john";
+    this.name = "John Doe";
     this.age = 50;
     this.email = "john@gmail.com"
     this.address = {
@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
   }
 
   addHobby(hobby: string) {
-    this.hobbies.unshift(hobby);
+    this.hobbies.push(hobby);
     return false;
   }
 
