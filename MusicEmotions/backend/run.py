@@ -1,8 +1,9 @@
 from flask import Flask, request
-import logging
-from logging.handlers import RotatingFileHandler
+from flask_cors import CORS, cross_origin
+import json
 
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route('/')
 def hello_world():
@@ -12,17 +13,14 @@ def hello_world():
 @app.route('/register', methods=['POST'])
 def register():
 
+    json_data = request.json
+
     if request.method == 'POST':
-        x = request.form['nm']
-        app.logger.info(x)
-        # print(x)
-        return x
+        return json.dumps(json_data['data'] + ' was received!!')
 
 
 
 if __name__ == '__main__':
-    handler = RotatingFileHandler('foo.log', maxBytes=10000, backupCount=1)
-    handler.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
+    app.debug = True
     app.run()
         

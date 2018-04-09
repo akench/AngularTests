@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -8,22 +9,20 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  @Input() data: string;
+  @Input() username: string;
+  @Input() password: string;
+  @Input() confirmedPassword: string;
 
-  ngOnInit(private http: Http) {
+  ngOnInit() {
   }
 
-  onSubmit() {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
+  // onSubmit() {
+  //   this.http.post('http://127.0.0.1:5000/register', {
+  //     'data': this.data
+  //   }).subscribe(data => console.log(data))
 
-    return this.http.post('http://localhost:3021/api/data', {'data': 3}, options)
-      .catch(this.handleError)
-      .subscribe(
-       (data) => console.log(data)
-    );
-  }
+  // }
 
 }
