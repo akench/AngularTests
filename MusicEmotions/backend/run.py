@@ -14,9 +14,26 @@ def hello_world():
 def register():
 
     json_data = request.json
+    username = json_data['username']
+    password = json_data['password']
 
     if request.method == 'POST':
-        return json.dumps(json_data['data'] + ' was received!!')
+        return json.dumps('hi')
+
+
+@app.route('/login', methods=['POST'])
+def login():
+
+    json_data = request.json
+
+    username = json_data['username']
+    password = json_data['password']
+
+    #if user in DB
+    if True:
+        return json.dumps('true')
+    else:
+        return json.dumps('false')
 
 
 
