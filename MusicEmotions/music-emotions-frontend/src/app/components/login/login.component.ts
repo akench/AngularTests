@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { sha256 } from 'js-sha256';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +11,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  username: string;
-  password: string;
+  username: string = "";
+  password: string = "";
+  loginFailed: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
   }
@@ -21,16 +23,27 @@ export class LoginComponent implements OnInit {
 
   login(): void {
 
+    if(this.password === "" || this.username === "") {
+      this.loginFailed = true;
+      return;
+    }
+
     var hashed = sha256(this.password);
-    var result;
 
     this.http.post('http://127.0.0.1:5000/login',
     {
       'username': this.username,
       'password': hashed
     }).subscribe((data => {
-      result = data
-      console.log(result);
+      console.log(data);
+      if(data === 'true') {
+        //login successful, redirect to home page
+        this.router.navigate(['/home']);
+      }
+      else {
+        this.loginFailed = true;
+      }
+
     }));
 
     
