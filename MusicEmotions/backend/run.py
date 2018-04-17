@@ -1,13 +1,15 @@
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 import json
-from flask_pymongo import PyMongo
+from pymongo import MongoClient
 
 app = Flask(__name__)
-app.config['MONGO_URI'] = "mongodb://localhost:27017/musicEmotionDB"
 
-mongo = PyMongo(app)
 cors = CORS(app)
+
+
+client = MongoClient('mongodb://localhost:27017/musicEmotionDB')
+collection = client.musicEmotionDB.users
 
 @app.route('/')
 def hello_world():
@@ -22,8 +24,8 @@ def register():
     password = json_data['password']
 
     if request.method == 'POST':   
-        user = mongo.db.users
-        user.insert({'username' : username, 
+
+        collection.insert({'username' : username, 
             'password': password, 
             'songs': {
                 'happy': [],
@@ -46,7 +48,7 @@ def login():
     username = json_data['username']
     password = json_data['password']
 
-    for obj in mongo.db.users.find():
+    for obj in collection.find():
         if obj['username'] == username and obj['password'] == password:
             return json.dumps('true')
 
