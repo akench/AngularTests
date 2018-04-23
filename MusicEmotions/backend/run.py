@@ -71,13 +71,24 @@ def classify_audio():
     emot = label_to_emot[label]
 
     addUrlToDb(username, emot, url)
-
     return json.dumps(emot)
+
+
+@app.route('/getSavedSongs/<username>', methods=['GET'])
+def getSavedSongs(username):
+
+    for obj in collection.find():
+        if obj['username'] == username:
+            return json.dumps(obj['songs'])
+
+    return json.dumps('error')
+
 
 
 def addUrlToDb(username, emot, url):
 
-    collection.find_one_and_update({'username': username})
+    thing_to_change = 'songs.{}'.format(emot)
+    collection.find_one_and_update({'username': username}, {'$push': {thing_to_change: url}})
 
 
 
