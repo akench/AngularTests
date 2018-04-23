@@ -62,6 +62,7 @@ def graph_spectrogram(audio_file, secs_per_spec = 10, save=True):
 
         plt.tight_layout()
         plt.axis('off')
+        plt.gray()
         plt.draw()
 
         import io

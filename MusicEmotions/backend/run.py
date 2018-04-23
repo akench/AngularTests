@@ -2,18 +2,15 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 import json
 from pymongo import MongoClient
+from predict import predict_class, label_to_emot
 
 app = Flask(__name__)
 
 cors = CORS(app)
 
 
-client = MongoClient('mongodb://localhost:27017/musicEmotionDB')
-collection = client.musicEmotionDB.users
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+client = MongoClient('mongodb://localhost:27017/musicemotions')
+collection = client.musicemotions.users
 
 
 @app.route('/register', methods=['POST'])
@@ -50,10 +47,24 @@ def login():
 
     for obj in collection.find():
         if obj['username'] == username and obj['password'] == password:
+            print('success!!')
             return json.dumps('true')
 
+    print('could not login!')
     return json.dumps('false');
 
+
+@cross_origin
+@app.route('/classify', methods=['POST'])
+def classify_audio():
+
+    #will send a list of the youtube links
+    json_data = request.json
+    url = json_data['url']
+
+    label = predict_class(url)
+
+    return json.dumps(label_to_emot[label])
 
 
 if __name__ == '__main__':
