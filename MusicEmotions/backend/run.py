@@ -58,13 +58,27 @@ def login():
 @app.route('/classify', methods=['POST'])
 def classify_audio():
 
-    #will send a list of the youtube links
+    #sends username and youtube url
     json_data = request.json
     url = json_data['url']
+    username = json_data['username']
 
     label = predict_class(url)
 
-    return json.dumps(label_to_emot[label])
+    if label == None:
+        return json.dumps('error')
+
+    emot = label_to_emot[label]
+
+    addUrlToDb(username, emot, url)
+
+    return json.dumps(emot)
+
+
+def addUrlToDb(username, emot, url):
+
+    collection.find_one_and_update({'username': username})
+
 
 
 if __name__ == '__main__':

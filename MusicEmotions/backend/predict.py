@@ -8,6 +8,7 @@ import parse_img as parse_img
 import glob
 import numpy as np
 import time
+import random
 
 
 label_to_emot = {0:'angry', 1:'happy', 2:'motivational', 3:'relaxing', 4:'sad'}
@@ -66,15 +67,24 @@ def get_conf_per_class(spec_list):
 
 def predict_class(youtube_link):
 
-        t0 = time.time()
+    t0 = time.time()
 
+
+    try:
         dl_audio_path = dl_audio(youtube_link, None)
-        specs_imgs = graph_spectrogram(dl_audio_path, save = False)
-        os.remove(dl_audio_path)
+    except:
+        return None
 
-        perc = get_conf_per_class(specs_imgs)
-        print(perc)
-        print('took %f seconds to predict.' % (time.time() - t0))
 
-        return np.argmax(perc)
+    specs_imgs = graph_spectrogram(dl_audio_path, save = False)
+    os.remove(dl_audio_path)
 
+    random.shuffle(specs_imgs)
+
+    specs_imgs = specs_imgs[: int(len(specs_imgs) / 2)]
+
+    perc = get_conf_per_class(specs_imgs)
+    print(perc)
+    print('took %f seconds to predict.' % (time.time() - t0))
+
+    return np.argmax(perc)
