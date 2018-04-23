@@ -19,10 +19,12 @@ export class HomeComponent implements OnInit {
   postUrl(): void {
 
     this.http.post('http://127.0.0.1:5000/classify', 
-      {'url': this.youtubeUrl}).subscribe(ret => {
+      {'username': localStorage.getItem('loggedInUser'), 'url': this.youtubeUrl}).subscribe(ret => {
         console.log('class = ' + ret);
 
     });
+
+    this.youtubeUrl = '';
   }
 
 }

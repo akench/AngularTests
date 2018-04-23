@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Music Emotions Organizer- Home</title>
+  <title>Song Viewer</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -11,14 +11,34 @@
 
 <body>
 
-  <br>
-  <label> Enter youtube url:
-    <input type="text" [(ngModel)]='youtubeUrl'>
-    <button type="button" class="btn" (click)="postUrl()">Submit</button>
-  </label>
+  <div>
+    <mat-accordion>
+
+      <div *ngFor="let emot of objectKeys(urlsPerEmot)">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title style="font-weight: bold;">
+              {{ emot }}
+            </mat-panel-title>
+            <mat-panel-description>
+              Click to expand
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <div *ngFor="let url of urlsPerEmot[emot]">
+            <li>{{ url }}</li>
+          </div>
+
+        </mat-expansion-panel>
+      </div>
 
 
-  <app-songs-viewer></app-songs-viewer>
+
+    </mat-accordion>
+  </div>
+
+
+
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>

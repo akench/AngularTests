@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       if(data === 'true') {
         //login successful, redirect to home page
+        localStorage.setItem('loggedInUser', this.username);
         this.router.navigate(['/home']);
       }
       else {
