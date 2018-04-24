@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { HttpClient } from '@angular/common/http';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-songs-viewer',
@@ -13,7 +12,7 @@ export class SongsViewerComponent implements OnInit {
   urlsPerEmot: any = {'happy': [], 'sad': [], 'angry': [], 'motivational': [], 'relaxing': []}
   songsLoaded: boolean = false;
 
-  constructor(private http: HttpClient, private spinnerService: Ng4LoadingSpinnerService) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
 

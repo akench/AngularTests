@@ -11,7 +11,7 @@
 
 <body>
 
-  <div>
+  <div *ngIf="songsLoaded">
     <mat-accordion>
 
       <div *ngFor="let emot of objectKeys(urlsPerEmot)">
