@@ -11,6 +11,7 @@
 
 <body>
 
+
   <div *ngIf="songsLoaded">
     <mat-accordion>
 
@@ -25,8 +26,10 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
 
-          <div *ngFor="let url of urlsPerEmot[emot]">
-            <li>{{ url }}</li>
+          <div *ngFor="let url of urlsPerEmot[emot]; let i = index;">
+            <p> {{ i+1 }}
+              <iframe width="420" height="315" [src]="getSafeUrl(url)"> </iframe>
+            </p>
           </div>
 
         </mat-expansion-panel>

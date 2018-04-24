@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { MatInputModule } from '@angular/material';
 import { SongsViewerComponent } from './components/songs-viewer/songs-viewer.component';
 
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { EmbedVideo } from 'ngx-embed-video';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     MatExpansionModule,
     MatInputModule,
     MatFormFieldModule,
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    HttpModule,
+    EmbedVideo.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
