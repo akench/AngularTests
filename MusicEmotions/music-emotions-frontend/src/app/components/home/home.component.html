@@ -13,8 +13,15 @@
 
   <br>
   <label> Enter youtube url:
-    <input type="text" [(ngModel)]='youtubeUrl'>
-    <button type="button" class="btn" (click)="postUrl()">Submit</button>
+    <input type="text" [(ngModel)]="youtubeUrl">
+    <button type="button" class="btn" (click)="postUrl(youtubeUrl)">Submit</button>
+  </label>
+
+  <br>
+  
+  <label>Enter many youtube urls:
+    <textarea rows="10" cols="50" [(ngModel)]="manyYoutubeUrls"></textarea>
+    <button type="button" class="btn" (click)="postAllUrls()">Submit</button>
   </label>
 
   <ng4-loading-spinner> </ng4-loading-spinner>

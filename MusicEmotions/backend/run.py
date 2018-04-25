@@ -87,6 +87,8 @@ def getSavedSongs(username):
 
 def addUrlToDb(username, emot, url):
 
+    url = url.replace('watch?v=', 'embed/')
+
     thing_to_change = 'songs.{}'.format(emot)
     collection.find_one_and_update({'username': username}, {'$push': {thing_to_change: url}})
 

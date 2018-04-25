@@ -38,7 +38,6 @@ export class SongsViewerComponent implements OnInit {
 
   getSafeUrl(url: string) {
     var x = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-    console.log(x);
     return x;
 }
 
